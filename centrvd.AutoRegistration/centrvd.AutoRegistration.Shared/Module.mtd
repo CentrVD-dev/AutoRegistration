@@ -3,11 +3,61 @@
   "NameGuid": "0d4a50a8-8b06-4f17-88b3-54e419d9a2b0",
   "Name": "AutoRegistration",
   "AsyncHandlers": [],
+  "Blocks": [
+    {
+      "$type": "Sungero.Metadata.ScriptBlockMetadata, Sungero.Workflow.Shared",
+      "NameGuid": "69258ca0-de3d-4a79-b425-565936f4ab4f",
+      "Name": "AutoRegistrationScriptBlock",
+      "BaseGuid": "1f76cc5d-f096-4062-b34a-51b3c02269f2",
+      "HandledEvents": [
+        "AutoRegistrationScriptBlockExecute"
+      ],
+      "OutProperties": [
+        {
+          "$type": "Sungero.Metadata.EnumBlockPropertyMetadata, Sungero.Metadata",
+          "NameGuid": "bdff51bf-44a5-428b-8657-7168456cf781",
+          "Name": "ExecutionResult",
+          "DirectValues": [
+            {
+              "NameGuid": "a6dc5cb0-9c5a-444e-941e-363f58bfa090",
+              "Name": "RegError",
+              "Code": "RegError"
+            }
+          ],
+          "IsAncestorMetadata": true,
+          "Overridden": [
+            "Values"
+          ]
+        },
+        {
+          "$type": "Sungero.Metadata.StringBlockPropertyMetadata, Sungero.Metadata",
+          "NameGuid": "a457183b-982f-412f-b1c5-6a60d70a285f",
+          "Name": "ErrorMessage"
+        }
+      ],
+      "Properties": [
+        {
+          "$type": "Sungero.Metadata.NavigationBlockPropertyMetadata, Sungero.Metadata",
+          "NameGuid": "c330313c-a9b8-494d-9199-6c9672c27f95",
+          "Name": "Document",
+          "EntityGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+          "PreviousPropertyGuid": "5dc92a72-3a65-4872-bc04-0aa7ec353b05"
+        },
+        {
+          "$type": "Sungero.Metadata.NavigationBlockPropertyMetadata, Sungero.Metadata",
+          "NameGuid": "6dab43af-4e45-4cc4-89a7-99570a059e65",
+          "Name": "DocumentRegister",
+          "EntityGuid": "d7800dd5-a9d2-41e9-bbc4-a39292ac1eeb",
+          "PreviousPropertyGuid": "c330313c-a9b8-494d-9199-6c9672c27f95"
+        }
+      ]
+    }
+  ],
   "ClientAssemblyName": "centrvd.AutoRegistration.Client",
   "ClientBaseAssemblyName": "centrvd.AutoRegistration.ClientBase",
   "ClientBaseNamespace": "centrvd.AutoRegistration.ClientBase",
   "ClientNamespace": "centrvd.AutoRegistration.Client",
-  "Code": "AutoRe1",
+  "Code": "AutoReg",
   "CompanyCode": "centrvd",
   "Cover": {
     "NameGuid": "5d4bf974-8647-4413-9a46-112a5052848c",
@@ -31,19 +81,12 @@
       "IsSolutionModule": true,
       "MaxVersion": "",
       "MinVersion": ""
-    }
-  ],
-  "ExplorerTreeOrder": [
-    {
-      "ItemId": "907353f1-fb34-4979-ba34-a34f542e1643"
     },
     {
-      "ItemId": "da1c707f-0add-45a9-8a57-5f3fffb0ea59",
-      "PreviousItemId": "907353f1-fb34-4979-ba34-a34f542e1643"
+      "Id": "ec7b606a-21ee-4f16-aba8-ab8c2af76d12",
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
     }
-  ],
-  "HandledEvents": [
-    "InitializingServer"
   ],
   "IconResourcesKeys": [],
   "Importance": "Medium",
@@ -57,7 +100,7 @@
   ],
   "PublicFunctions": [
     {
-      "Name": "GetDefaultDocRegister",
+      "Name": "AutoRegistrationDocument",
       "Parameters": [
         {
           "Name": "document",
@@ -65,43 +108,47 @@
           "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
         },
         {
-          "Name": "filteredDocRegisters",
-          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IDocumentRegister>",
-          "ParameterTypeFullName": "System.Collections.Generic.List"
-        },
-        {
-          "Name": "settingType",
-          "ParameterType": "global::System.Nullable<global::Sungero.Core.Enumeration>",
-          "ParameterTypeFullName": "System.Nullable"
+          "Name": "documentRegister",
+          "ParameterType": "global::Sungero.Docflow.IDocumentRegister",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentRegister, Sungero.Domain.Interfaces"
         }
       ],
-      "Placement": "Shared",
-      "ReturnType": "global::Sungero.Docflow.IDocumentRegister",
-      "ReturnTypeFullName": "Sungero.Docflow.IDocumentRegister, Sungero.Domain.Interfaces"
-    },
-    {
-      "Name": "GetDocumentRegistersByDocument",
-      "Parameters": [
-        {
-          "Name": "document",
-          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
-          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
-        },
-        {
-          "Name": "settingType",
-          "ParameterType": "global::System.Nullable<global::Sungero.Core.Enumeration>",
-          "ParameterTypeFullName": "System.Nullable"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IDocumentRegister>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
+      "ReturnType": "global::centrvd.AutoRegistration.Structures.Module.IDocumentAutoregistrationResult",
+      "ReturnTypeFullName": "centrvd.AutoRegistration.Structures.Module.IDocumentAutoregistrationResult"
     }
   ],
-  "PublicStructures": [],
+  "PublicStructures": [
+    {
+      "Name": "DocumentAutoregistrationResult",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "IsError",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "IsLocked",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "Message",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "centrvd.AutoRegistration.Structures.Module"
+    }
+  ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "centrvd.AutoRegistration",
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "DocumentPreviouslyRegistered",
+    "NotFoundSetting",
+    "NotFoundRegSetting",
+    "NoDocument",
+    "DocumentIsLocked",
+    "FailedToRegister"
+  ],
   "ServerAssemblyName": "centrvd.AutoRegistration.Server",
   "ServerNamespace": "centrvd.AutoRegistration.Server",
   "SharedAssemblyName": "centrvd.AutoRegistration.Shared",

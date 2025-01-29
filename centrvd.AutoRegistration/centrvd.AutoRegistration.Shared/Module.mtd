@@ -154,7 +154,7 @@
   "SharedAssemblyName": "centrvd.AutoRegistration.Shared",
   "SharedNamespace": "centrvd.AutoRegistration.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.0",
+  "Version": "0.0.1.1",
   "Widgets": [],
   "Versions": [
     {
